@@ -1,6 +1,7 @@
 package com.ryfazrin.fundamentalrecyclerview
 
 import android.animation.ValueAnimator
+import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -38,7 +39,11 @@ class MainActivity : AppCompatActivity() {
         }
 
     private fun showRecyclerList() {
-        rvHeroes.layoutManager = GridLayoutManager(this, 2)
+        if (applicationContext.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            rvHeroes.layoutManager = GridLayoutManager(this, 2)
+        } else {
+            rvHeroes.layoutManager = LinearLayoutManager(this)
+        }
         val listHeroAdapter = ListHeroAdapter(list)
         rvHeroes.adapter = listHeroAdapter
 
